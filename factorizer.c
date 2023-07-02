@@ -7,8 +7,8 @@
 */
 int factorizer(char *num_string)
 {
-	int num;
-	int divisor;
+	u_int32_t num;
+	u_int32_t divisor;
 
 	num = atoi(num_string);
 
