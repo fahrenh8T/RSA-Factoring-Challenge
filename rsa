@@ -4,49 +4,49 @@ import sys
 import time
 
 
-def prime_handler(number):
-    if number < 2:
+def prime_handler(n):
+    if n < 2:
         return False
-    for i in range(2, int(sqrt(number)) + 1):
-        if number % i == 0:
+    for i in range(2, int(sqrt(n)) + 1):
+        if n % i == 0:
             return False
     return True
 
 
-def factorize_rsa(number):
+def factorize_rsa(n):
     factors = []
-    while number % 2 == 0:
+    while n % 2 == 0:
         factors.append(2)
-        number //= 2
+        n //= 2
     i = 3
-    while i <= sqrt(number):
-        if number % i == 0:
+    while i <= sqrt(n):
+        if n % i == 0:
             factors.append(i)
-            number //= i
+            n //= i
         else:
             i += 2
-    if number > 2:
-        factors.append(number)
+    if n > 2:
+        factors.append(n)
     if len(factors) == 1:
-        r = factors[0]
-        w = number // r
-        return (r, w)
+        p = factors[0]
+        q = n // p
+        return (p, q)
     else:
-        rw = []
+        pq = []
         for factor in factors:
             if prime_handler(factor):
-                rw.append(factor)
+                pq.append(factor)
             else:
-                r, w = factorize_rsa(factor)
-                rw.append(r)
-                rw.append(w)
-        return tuple(rw)
+                p, q = factorize_rsa(factor)
+                pq.append(p)
+                pq.append(q)
+        return tuple(pq)
 
 
 input_file = sys.argv[1]
-with open(input_file, 'r') as file:
-    rsa_numbers = [int(line.strip()) for line in file.readlines()]
+with open(input_file, 'r') as f:
+    rsa_numbers = [int(line.strip()) for line in f.readlines()]
 
-for number in rsa_numbers:
-    r, w = factorize_rsa(number)
-    print(f"{number}={w}*{r}")
+for n in rsa_numbers:
+    p, q = factorize_rsa(n)
+    print(f"{n}={q}*{p}")
