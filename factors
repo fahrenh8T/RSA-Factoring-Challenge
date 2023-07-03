@@ -16,15 +16,12 @@ if __name__ == "__main__":
         exit()
 
     input_file = sys.argv[1]
-
     try:
         with open(input_file, 'r') as file:
             lines = file.readlines()
     except FileNotFoundError:
         print("File not found")
         exit()
-
-    start_time = time.time()
 
     for line in lines:
         number = int(line.strip())
