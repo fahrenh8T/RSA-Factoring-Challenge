@@ -31,7 +31,3 @@ if __name__ == "__main__":
         factors = fact(number)
         if factors:
             print(f"{number}={factors[0]}*{factors[1]}")
-
-        if time.time() - start_time > 5:
-            print("Time limit exceeded")
-            exit()
